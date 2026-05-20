@@ -63,7 +63,7 @@ async function getAnalyticsData() {
     }))
     .sort((a, b) => b.value - a.value);
 
-  const totalSpent = expenses.reduce((sum: number, exp) => sum + exp.amount, 0);
+  const totalSpent = expenses.reduce((sum: number, exp: { amount: number }) => sum + exp.amount, 0);
   const avgMonthly = totalSpent / 6;
   const topCategory = categoryData[0]?.name || "None";
 
