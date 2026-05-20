@@ -15,7 +15,7 @@ export async function computeHealthScore(month: number, year: number) {
     include: { category: true }
   });
 
-  const totalSpend = expenses.reduce((sum, exp) => sum + exp.amount, 0);
+  const totalSpend = expenses.reduce((sum: number, exp) => sum + exp.amount, 0);
 
   // Assumed income for savings ratio (could be fetched from User model if added)
   // For now, we will assume income is 1.5x of total spend + some buffer to simulate savings

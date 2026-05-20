@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
       include: { category: true }
     });
 
-    let baseTotal = pastExpenses.reduce((sum, e) => sum + e.amount, 0) / 3 || 1200;
+    let baseTotal = pastExpenses.reduce((sum: number, e) => sum + e.amount, 0) / 3 || 1200;
     // Add seasonal inflation multiplier simulation
     const predictedTotal = Math.round((baseTotal * 1.08) * 100) / 100;
 

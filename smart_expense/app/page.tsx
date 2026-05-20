@@ -28,7 +28,7 @@ async function getDashboardData() {
     orderBy: { date: 'desc' },
   });
 
-  const totalSpent = expenses.reduce((sum, exp) => sum + exp.amount, 0);
+  const totalSpent = expenses.reduce((sum: number, exp) => sum + exp.amount, 0);
   const recentExpenses = expenses.slice(0, 5);
 
   const categoryTotals: Record<string, number> = {};
@@ -44,7 +44,7 @@ async function getDashboardData() {
   const budgets = await prisma.budget.findMany({
     where: { userId: MOCK_USER.id, month: now.getMonth() + 1, year: now.getFullYear() }
   });
-  const totalBudget = budgets.reduce((sum, b) => sum + b.amount, 0);
+  const totalBudget = budgets.reduce((sum: number, b) => sum + b.amount, 0);
   
   return {
     totalSpent,

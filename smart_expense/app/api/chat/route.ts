@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
       
       const over: string[] = [];
       budgets.forEach(b => {
-        const spent = expenses.filter(e => e.categoryId === b.categoryId).reduce((sum, e) => sum + e.amount, 0);
+        const spent = expenses.filter(e => e.categoryId === b.categoryId).reduce((sum: number, e) => sum + e.amount, 0);
         if (spent > b.amount) {
           over.push(`**${b.category?.name || "General"}** ($${spent.toFixed(2)} spent vs $${b.amount} budgeted)`);
         }
@@ -70,13 +70,13 @@ export async function POST(req: NextRequest) {
       }
     } else if (lower.includes("travel") || lower.includes("flight") || lower.includes("hotel")) {
       const travelExps = expenses.filter(e => e.category.name.toLowerCase().includes("travel") || e.category.name.toLowerCase().includes("transport"));
-      const totalTravel = travelExps.reduce((sum, e) => sum + e.amount, 0);
+      const totalTravel = travelExps.reduce((sum: number, e) => sum + e.amount, 0);
       responseText = `You have logged **${travelExps.length}** travel-related transactions this month, totaling **$${totalTravel.toFixed(2)}**.`;
     } else if (lower.includes("total") || lower.includes("spent") || lower.includes("how much")) {
-      const total = expenses.reduce((sum, e) => sum + e.amount, 0);
+      const total = expenses.reduce((sum: number, e) => sum + e.amount, 0);
       responseText = `Your total registered expenditure for the current month stands at **$${total.toFixed(2)}** across **${expenses.length}** transactions.`;
     } else {
-      responseText = `I see your inquiry regarding "${message}". Based on your active profile, you have logged $${expenses.reduce((sum, e) => sum + e.amount, 0).toFixed(2)} total this month. Try asking "Where did I spend the most?" or "Show my budget status" for highly customized drill-downs.`;
+      responseText = `I see your inquiry regarding "${message}". Based on your active profile, you have logged $${expenses.reduce((sum: number, e) => sum + e.amount, 0).toFixed(2)} total this month. Try asking "Where did I spend the most?" or "Show my budget status" for highly customized drill-downs.`;
     }
 
     // Save assistant response to DB

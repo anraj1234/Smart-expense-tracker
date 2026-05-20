@@ -28,7 +28,7 @@ export async function GET(req: NextRequest) {
       orderBy: { date: "asc" },
     });
 
-    const total = expenses.reduce((sum, exp) => sum + exp.amount, 0);
+    const total = expenses.reduce((sum: number, exp) => sum + exp.amount, 0);
     const monthName = startOfMonth.toLocaleString('default', { month: 'long' });
 
     const pdfBuffer = await generateMonthlyReport(expenses, monthName, yearStr, total);
