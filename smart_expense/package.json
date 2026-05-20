@@ -9,11 +9,9 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@prisma/adapter-better-sqlite3": "^7.8.0",
     "@prisma/client": "^7.8.0",
     "@tanstack/react-query": "^5.100.10",
     "axios": "^1.16.0",
-    "better-sqlite3": "^12.9.0",
     "date-fns": "^4.1.0",
     "groq-sdk": "^1.2.0",
     "lucide-react": "^1.14.0",
