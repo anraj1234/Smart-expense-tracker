@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-border: #e2e8f0;
+  --accent: #2563eb;
+}
+
+.dark {
+  --background: #050508;
+  --foreground: #e2ffe2;
+  --card: #0c0f14;
+  --card-border: rgba(16, 185, 129, 0.15);
+  --accent: #10b981;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ===== GAMIFICATION DARK CARD ===== */
+.dark .game-card {
+  background: linear-gradient(135deg, #0c0f14 0%, #0d1117 100%);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 0 1px rgba(16, 185, 129, 0.05), 0 4px 24px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(16, 185, 129, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.dark .game-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.4), transparent);
+}
+
+/* ===== NEON GLOW EFFECTS ===== */
+.dark .neon-text {
+  color: #10b981;
+  text-shadow: 0 0 20px rgba(16, 185, 129, 0.5), 0 0 40px rgba(16, 185, 129, 0.2);
+}
+
+.dark .neon-text-sm {
+  color: #34d399;
+  text-shadow: 0 0 10px rgba(52, 211, 153, 0.3);
+}
+
+.dark .neon-border {
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);
+}
+
+/* ===== XP BAR ===== */
+.dark .xp-bar-track {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.dark .xp-bar-fill {
+  background: linear-gradient(90deg, #059669, #10b981, #34d399);
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.6), 0 0 16px rgba(16, 185, 129, 0.3);
+}
+
+/* ===== STAT BADGE ===== */
+.dark .stat-badge {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: #10b981;
+}
+
+/* ===== GRID LINES ===== */
+.dark .grid-bg {
+  background-image: 
+    linear-gradient(rgba(16, 185, 129, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(16, 185, 129, 0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ===== GLOW BUTTON ===== */
+.dark .glow-btn {
+  background: linear-gradient(135deg, #059669, #10b981);
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), 0 4px 12px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  color: #000;
+  font-weight: 700;
+}
+
+.dark .glow-btn:hover {
+  box-shadow: 0 0 30px rgba(16, 185, 129, 0.6), 0 4px 20px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+/* ===== SCAN LINE ANIMATION ===== */
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 5px rgba(16, 185, 129, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(16, 185, 129, 0.6), 0 0 40px rgba(16, 185, 129, 0.2); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.dark .pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.dark .float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* ===== SCROLLBAR ===== */
+.dark ::-webkit-scrollbar {
+  width: 6px;
+}
+.dark ::-webkit-scrollbar-track {
+  background: #050508;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(16, 185, 129, 0.3);
+  border-radius: 3px;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(16, 185, 129, 0.5);
+}
+
+/* ===== TABLE ROWS ===== */
+.dark .table-row-hover:hover {
+  background: rgba(16, 185, 129, 0.04);
+  border-color: rgba(16, 185, 129, 0.15);
+}
+
+/* ===== GRADIENT HEADINGS ===== */
+.dark .gradient-heading {
+  background: linear-gradient(135deg, #10b981, #34d399, #6ee7b7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

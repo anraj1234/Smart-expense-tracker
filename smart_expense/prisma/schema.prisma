@@ -1,0 +1,147 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  avatarUrl String?
+  currency  String   @default("USD")
+  createdAt DateTime @default(now())
+
+  expenses   Expense[]
+  budgets    Budget[]
+  categories Category[]
+  notifications Notification[]
+}
+
+model Expense {
+  id          String   @id @default(cuid())
+  amount      Float
+  currency    String   @default("USD")
+  description String
+  date        DateTime
+  notes       String?
+  receiptUrl  String?
+  tags        String   @default("[]")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  deletedAt   DateTime?
+
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+
+  @@index([userId, date])
+  @@index([userId, categoryId])
+}
+
+model Category {
+  id     String  @id @default(cuid())
+  name   String
+  icon   String  @default("tag")
+  color  String  @default("#6B7280")
+  userId String?
+  user   User?   @relation(fields: [userId], references: [id])
+
+  expenses Expense[]
+  budgets  Budget[]
+}
+
+model Budget {
+  id         String @id @default(cuid())
+  amount     Float
+  period     String @default("monthly")
+  month      Int?
+  year       Int?
+  userId     String
+  user       User   @relation(fields: [userId], references: [id])
+  categoryId String?
+  category   Category? @relation(fields: [categoryId], references: [id])
+
+  @@unique([userId, categoryId, month, year])
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  title     String
+  message   String
+  read      Boolean  @default(false)
+  type      String   @default("info")
+  createdAt DateTime @default(now())
+  
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+}
+
+model HealthScore {
+  id          String   @id @default(cuid())
+  userId      String
+  month       Int
+  year        Int
+  score       Int
+  savingsComp Int
+  budgetComp  Int
+  balanceComp Int
+  consistency Int
+  badge       String
+  createdAt   DateTime @default(now())
+  
+  @@unique([userId, month, year])
+}
+
+model AIInsight {
+  id        String   @id @default(cuid())
+  userId    String
+  month     Int
+  year      Int
+  insights  String
+  createdAt DateTime @default(now())
+  
+  @@unique([userId, month, year])
+}
+
+model BudgetSuggestion {
+  id              String   @id @default(cuid())
+  userId          String
+  categoryId      String
+  suggestedAmount Float
+  reason          String
+  status          String   @default("PENDING")
+  month           Int
+  year            Int
+  createdAt       DateTime @default(now())
+  
+  @@unique([userId, categoryId, month, year])
+}
+
+model ChatMessage {
+  id        String   @id @default(cuid())
+  userId    String
+  role      String
+  content   String
+  createdAt DateTime @default(now())
+
+  @@index([userId, createdAt])
+}
+
+model SpendingPrediction {
+  id                  String   @id @default(cuid())
+  userId              String
+  month               Int
+  year                Int
+  predictedTotal      Float
+  categoryPredictions String
+  confidence          Float
+  createdAt           DateTime @default(now())
+
+  @@unique([userId, month, year])
+}
