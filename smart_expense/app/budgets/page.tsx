@@ -55,12 +55,12 @@ export default async function BudgetsPage() {
                   <div className="flex items-center gap-3">
                     <div 
                       className="w-10 h-10 rounded-full flex items-center justify-center text-white shrink-0"
-                      style={{ backgroundColor: b.category.color }}
+                      style={{ backgroundColor: b.category?.color || "#6B7280" }}
                     >
-                      <span className="font-bold text-sm">{b.category.name.charAt(0)}</span>
+                      <span className="font-bold text-sm">{(b.category?.name || "Budget").charAt(0)}</span>
                     </div>
                     <div>
-                      <p className="font-semibold text-slate-900 dark:text-emerald-400">{b.category.name}</p>
+                      <p className="font-semibold text-slate-900 dark:text-emerald-400">{b.category?.name || "Total Budget"}</p>
                       <p className="text-sm text-slate-500 dark:text-emerald-600">Monthly Limit</p>
                     </div>
                   </div>

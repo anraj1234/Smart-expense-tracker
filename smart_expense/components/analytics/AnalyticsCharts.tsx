@@ -45,7 +45,7 @@ export function AnalyticsCharts({ monthlyData, categoryData }: AnalyticsChartsPr
               <Tooltip 
                 cursor={{ fill: 'rgba(59, 130, 246, 0.05)' }}
                 contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                formatter={(value: number) => [`$${value.toFixed(2)}`, 'Spent']}
+                formatter={(value: any) => [`$${Number(value).toFixed(2)}`, 'Spent']}
               />
               <Bar 
                 dataKey="amount" 
@@ -79,7 +79,7 @@ export function AnalyticsCharts({ monthlyData, categoryData }: AnalyticsChartsPr
                 </Pie>
                 <Tooltip 
                   contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                  formatter={(value: number) => [`$${value.toFixed(2)}`, 'Amount']}
+                  formatter={(value: any) => [`$${Number(value).toFixed(2)}`, 'Amount']}
                 />
                 <Legend 
                   layout="vertical" 

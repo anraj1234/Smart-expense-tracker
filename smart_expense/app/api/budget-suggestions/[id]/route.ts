@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { MOCK_USER } from "@/lib/constants";
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const resolvedParams = await params;
     const { status } = await req.json(); // ACCEPTED or REJECTED
     
     if (status !== "ACCEPTED" && status !== "REJECTED") {
@@ -11,7 +12,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     }
 
     const suggestion = await prisma.budgetSuggestion.update({
-      where: { id: params.id, userId: MOCK_USER.id },
+      where: { id: resolvedParams.id, userId: MOCK_USER.id },
       data: { status }
     });
 

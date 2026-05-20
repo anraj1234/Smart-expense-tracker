@@ -68,7 +68,7 @@ export function ExpensesChart({ expenses, categoryTotals, categoryColors }: Expe
               />
               <Tooltip 
                 contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                formatter={(value: number) => [`$${value.toFixed(2)}`, 'Spent']}
+                formatter={(value: any) => [`$${Number(value).toFixed(2)}`, 'Spent']}
               />
               <Area 
                 type="monotone" 
@@ -101,7 +101,7 @@ export function ExpensesChart({ expenses, categoryTotals, categoryColors }: Expe
               <Tooltip 
                 cursor={{ fill: 'transparent' }}
                 contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}
-                formatter={(value: number) => [`$${value.toFixed(2)}`, 'Amount']}
+                formatter={(value: any) => [`$${Number(value).toFixed(2)}`, 'Amount']}
               />
               <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={20}>
                 {categoryData.map((entry, index) => (

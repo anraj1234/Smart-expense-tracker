@@ -34,7 +34,7 @@ export async function triggerMockAlerts() {
       title: randomAlert.title,
       message: randomAlert.message,
       type: randomAlert.type,
-      isRead: false
+      read: false
     }
   });
 
