@@ -151,7 +151,7 @@ export function ExpenseForm({ isOpen, onClose, onSuccess, expense }: ExpenseForm
                     min="0"
                     required
                     value={formData.amount}
-                    onChange={e => setFormData({ ...formData, amount: e.target.value })}
+                    onChange={e => setFormData(prev => ({ ...prev, amount: e.target.value }))}
                     className={`${inputClass} text-2xl font-black py-4`}
                     placeholder="0.00"
                   />
@@ -167,7 +167,7 @@ export function ExpenseForm({ isOpen, onClose, onSuccess, expense }: ExpenseForm
                     type="text"
                     required
                     value={formData.description}
-                    onChange={e => setFormData({ ...formData, description: e.target.value })}
+                    onChange={e => setFormData(prev => ({ ...prev, description: e.target.value }))}
                     className={inputClass}
                     placeholder="What did you spend on?"
                   />
@@ -177,42 +177,54 @@ export function ExpenseForm({ isOpen, onClose, onSuccess, expense }: ExpenseForm
               {/* Category */}
               <div className="space-y-2">
                 <label className="text-xs font-bold text-slate-500 dark:text-emerald-800 uppercase tracking-wider">Category</label>
-                <div className="relative">
-                  <Tag className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 dark:text-emerald-700 pointer-events-none z-10" />
-                  <select
-                    required
-                    value={formData.categoryId}
-                    onChange={e => setFormData({ ...formData, categoryId: e.target.value })}
-                    className={`${inputClass} appearance-none cursor-pointer`}
-                  >
-                    <option value="" disabled className="dark:bg-[#080b10]">Select a category</option>
-                    {categories.map(cat => (
-                      <option key={cat.id} value={cat.id} className="dark:bg-[#080b10]">{cat.name}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
 
-              {/* Category pills (visual picker) */}
-              {categories.length > 0 && (
-                <div className="flex flex-wrap gap-2 pt-1">
-                  {categories.map(cat => (
-                    <button
-                      key={cat.id}
-                      type="button"
-                      onClick={() => setFormData({ ...formData, categoryId: cat.id })}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 border
-                        ${formData.categoryId === cat.id
-                          ? "border-transparent text-white scale-105"
-                          : "border-slate-200 dark:border-emerald-900/20 text-slate-500 dark:text-emerald-900 bg-slate-50 dark:bg-transparent hover:border-slate-300"
-                        }`}
-                      style={formData.categoryId === cat.id ? { backgroundColor: cat.color, boxShadow: `0 0 12px ${cat.color}60` } : {}}
+                {categories.length === 0 ? (
+                  <p className="text-xs text-slate-400 dark:text-emerald-900 italic px-1">Loading categories…</p>
+                ) : (
+                  <>
+                    {/* Hidden native select for form validation */}
+                    <select
+                      required
+                      value={formData.categoryId}
+                      onChange={e => setFormData(prev => ({ ...prev, categoryId: e.target.value }))}
+                      className="sr-only"
+                      aria-hidden="true"
+                      tabIndex={-1}
                     >
-                      {cat.name}
-                    </button>
-                  ))}
-                </div>
-              )}
+                      <option value="">Select a category</option>
+                      {categories.map(cat => (
+                        <option key={cat.id} value={cat.id}>{cat.name}</option>
+                      ))}
+                    </select>
+
+                    {/* Visual pill picker — primary interaction */}
+                    <div className="flex flex-wrap gap-2 pt-1">
+                      {categories.map(cat => {
+                        const isSelected = formData.categoryId === cat.id;
+                        return (
+                          <button
+                            key={cat.id}
+                            type="button"
+                            onClick={() => setFormData(prev => ({ ...prev, categoryId: cat.id }))}
+                            className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all duration-200 border ${
+                              isSelected
+                                ? "border-transparent text-white scale-105 shadow-lg"
+                                : "border-slate-200 dark:border-emerald-900/20 text-slate-600 dark:text-emerald-700 bg-slate-50 dark:bg-transparent hover:border-slate-300 hover:bg-slate-100 dark:hover:bg-emerald-500/5"
+                            }`}
+                            style={isSelected ? { backgroundColor: cat.color, boxShadow: `0 0 14px ${cat.color}70` } : {}}
+                          >
+                            {cat.name}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {!formData.categoryId && (
+                      <p className="text-xs text-red-400 dark:text-red-600 mt-1">Please select a category</p>
+                    )}
+                  </>
+                )}
+              </div>
 
               {/* Date */}
               <div className="space-y-2">
@@ -223,7 +235,7 @@ export function ExpenseForm({ isOpen, onClose, onSuccess, expense }: ExpenseForm
                     type="date"
                     required
                     value={formData.date}
-                    onChange={e => setFormData({ ...formData, date: e.target.value })}
+                    onChange={e => setFormData(prev => ({ ...prev, date: e.target.value }))}
                     className={inputClass}
                   />
                 </div>
