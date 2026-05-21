@@ -45,11 +45,11 @@ export default function ExpensesPage() {
   };
 
   return (
-    <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="space-y-4 lg:space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-emerald-400">Expenses</h1>
-          <p className="text-slate-500 dark:text-emerald-600">Manage and track your daily spending.</p>
+          <h1 className="text-xl lg:text-2xl font-bold tracking-tight text-slate-900 dark:text-emerald-400">Expenses</h1>
+          <p className="text-slate-500 dark:text-emerald-600 text-sm">Manage and track your daily spending.</p>
         </div>
         <div className="flex gap-2">
           <button 
@@ -57,19 +57,21 @@ export default function ExpensesPage() {
               const now = new Date();
               window.open(`/api/reports/monthly?month=${now.getMonth() + 1}&year=${now.getFullYear()}`);
             }}
-            className="flex items-center gap-2 px-4 py-2 text-slate-700 bg-white dark:bg-black border border-slate-300 hover:bg-slate-50 dark:bg-[#0a0a0a] rounded-lg font-medium transition-colors shadow-sm"
+            className="flex items-center gap-2 px-3 py-2 text-slate-700 bg-white dark:bg-black border border-slate-300 hover:bg-slate-50 rounded-lg font-medium transition-colors shadow-sm text-sm"
           >
-            Download Report
+            <span className="hidden sm:inline">Download Report</span>
+            <span className="sm:hidden">Report</span>
           </button>
           <button 
             onClick={() => {
               setEditingExpense(null);
               setIsFormOpen(true);
             }}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-sm shadow-blue-600/20"
+            className="flex items-center gap-2 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors shadow-sm shadow-blue-600/20 text-sm"
           >
             <Plus className="w-4 h-4" />
-            Add Expense
+            <span className="hidden sm:inline">Add Expense</span>
+            <span className="sm:hidden">Add</span>
           </button>
         </div>
       </div>
@@ -164,12 +166,12 @@ export default function ExpensesPage() {
                     <td className="px-6 py-4 text-right font-bold text-slate-900 dark:text-emerald-400">
                       ${exp.amount.toFixed(2)}
                     </td>
-                    <td className="px-6 py-4 text-center">
-                      <div className="flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                        <button onClick={() => handleEdit(exp)} className="p-1 text-slate-400 hover:text-blue-600 rounded">
+                    <td className="px-4 lg:px-6 py-4 text-center">
+                      <div className="flex items-center justify-center gap-2 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button onClick={() => handleEdit(exp)} className="p-1.5 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">
                           <Edit2 className="w-4 h-4" />
                         </button>
-                        <button onClick={() => handleDelete(exp.id)} className="p-1 text-slate-400 hover:text-red-600 rounded">
+                        <button onClick={() => handleDelete(exp.id)} className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>

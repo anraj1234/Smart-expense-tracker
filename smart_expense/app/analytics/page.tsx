@@ -80,16 +80,16 @@ export default async function AnalyticsPage() {
   const data = await getAnalyticsData();
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="space-y-6 lg:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-emerald-400">Analytics</h1>
-          <p className="text-slate-500 dark:text-emerald-600">Dive deep into your spending habits over the last 6 months.</p>
+          <h1 className="text-xl lg:text-2xl font-bold tracking-tight text-slate-900 dark:text-emerald-400">Analytics</h1>
+          <p className="text-slate-500 dark:text-emerald-600 text-sm">Dive deep into your spending habits over the last 6 months.</p>
         </div>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6">
         <div className="bg-white dark:bg-black rounded-2xl p-6 border border-slate-100 dark:border-emerald-900/40 shadow-sm relative overflow-hidden">
           <div className="absolute top-0 right-0 p-6 opacity-10">
             <Wallet className="w-16 h-16 text-blue-600" />

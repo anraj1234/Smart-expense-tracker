@@ -93,7 +93,7 @@ function StatCard({
       </div>
 
       <div className="flex items-baseline gap-2 mb-2">
-        <span className="text-3xl font-black text-slate-900 dark:text-emerald-400 neon-text">{value}</span>
+        <span className="text-xl lg:text-3xl font-black text-slate-900 dark:text-emerald-400 neon-text truncate">{value}</span>
       </div>
       
       {sub && <p className="text-sm text-slate-400 dark:text-emerald-900">{sub}</p>}
@@ -118,14 +118,14 @@ export default async function DashboardPage() {
   const budgetPercentage = data.totalBudget > 0 ? (data.totalSpent / data.totalBudget) * 100 : 0;
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="space-y-6 lg:space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-emerald-400 dark:via-emerald-300 dark:to-teal-400 gradient-heading">
+          <h1 className="text-2xl lg:text-3xl font-black tracking-tight text-slate-900 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-emerald-400 dark:via-emerald-300 dark:to-teal-400 gradient-heading">
             Dashboard
           </h1>
-          <p className="text-slate-500 dark:text-emerald-900 mt-1 flex items-center gap-2">
+          <p className="text-slate-500 dark:text-emerald-900 mt-1 flex items-center gap-2 text-sm">
             <Star className="w-3.5 h-3.5 text-amber-400 dark:text-emerald-700" />
             {data.monthName} Overview · Level 12 Saver
           </p>
@@ -150,7 +150,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-5">
         <StatCard 
           title="Total Spent" 
           value={`$${data.totalSpent.toFixed(2)}`}
@@ -196,7 +196,7 @@ export default async function DashboardPage() {
       />
 
       {/* Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
         <div className="lg:col-span-2 space-y-6">
           <AIInsightPanel />
 

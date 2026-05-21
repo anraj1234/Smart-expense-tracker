@@ -121,7 +121,7 @@ export function FloatingChatbot() {
       {/* Launcher Bubble Button */}
       <button
         onClick={() => setIsOpen(prev => !prev)}
-        className={`fixed right-6 bottom-6 z-50 w-14 h-14 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 dark:glow-btn text-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 group ${
+        className={`fixed right-4 bottom-20 lg:bottom-6 z-50 w-14 h-14 rounded-full bg-gradient-to-tr from-purple-600 to-indigo-600 dark:glow-btn text-white flex items-center justify-center shadow-2xl transition-all duration-300 hover:scale-110 group ${
           isOpen ? 'rotate-90 scale-0 opacity-0 pointer-events-none' : ''
         }`}
         title="Open AI Assistant"
@@ -135,7 +135,7 @@ export function FloatingChatbot() {
 
       {/* Main Global Chatbot Window Panel */}
       {isOpen && (
-        <div className="fixed right-6 bottom-6 z-50 w-full max-w-sm h-[520px] rounded-2xl bg-white dark:bg-[#080b10] border border-slate-100 dark:border-emerald-900/30 shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
+        <div className="fixed right-2 left-2 sm:left-auto sm:right-4 bottom-20 lg:bottom-6 z-50 w-auto sm:w-full sm:max-w-sm h-[520px] rounded-2xl bg-white dark:bg-[#080b10] border border-slate-100 dark:border-emerald-900/30 shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-300">
           {/* Header */}
           <div className="p-4 bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-[#0a0d14] dark:to-[#0c0f1a] text-white flex items-center justify-between border-b border-purple-500/30 dark:border-emerald-900/30">
             <div className="flex items-center gap-2.5">
