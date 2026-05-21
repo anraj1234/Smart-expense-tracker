@@ -204,7 +204,7 @@ export default async function DashboardPage() {
           <div className="game-card bg-white rounded-2xl border border-slate-100 shadow-sm p-6 flex flex-col">
             <div className="flex items-center justify-between mb-6">
               <h3 className="font-black text-slate-900 dark:text-emerald-300 text-lg gradient-heading">Recent Transactions</h3>
-              <button className="text-sm font-semibold text-blue-600 dark:text-emerald-600 hover:text-blue-700 dark:hover:text-emerald-400 transition-colors">View All →</button>
+              <a href="/expenses" className="text-sm font-semibold text-blue-600 dark:text-emerald-600 hover:text-blue-700 dark:hover:text-emerald-400 transition-colors">View All →</a>
             </div>
             
             <div className="space-y-2">

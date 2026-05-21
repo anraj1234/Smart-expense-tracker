@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { MOCK_USER } from "@/lib/constants";
 import { BudgetSuggestionsReview } from "@/components/budgets/BudgetSuggestionsReview";
+import { AddBudgetForm } from "@/components/budgets/AddBudgetForm";
 
 export default async function BudgetsPage() {
   const now = new Date();
@@ -37,6 +38,7 @@ export default async function BudgetsPage() {
           <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-emerald-400">Budgets</h1>
           <p className="text-slate-500 dark:text-emerald-600">Manage your monthly budgets and review AI recommendations.</p>
         </div>
+        <AddBudgetForm categories={categories.map(c => ({ id: c.id, name: c.name, color: c.color || "#6B7280" }))} />
       </div>
 
       <BudgetSuggestionsReview suggestions={suggestionsWithNames} />

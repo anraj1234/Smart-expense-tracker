@@ -85,7 +85,10 @@ export function Sidebar() {
           <Settings className="w-5 h-5 text-slate-400 dark:text-slate-600 group-hover:text-blue-400 dark:group-hover:text-emerald-500 transition-colors" />
           <span className="font-medium text-sm">Preferences</span>
         </Link>
-        <button className="w-full mt-1 flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-red-500/10 hover:text-red-400 dark:hover:bg-red-500/5 dark:text-slate-500 transition-all group">
+        <button 
+          onClick={() => { if (window.confirm("This is a demo app. Log out is not available yet. Go back to dashboard?")) window.location.href = "/"; }}
+          className="w-full mt-1 flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-red-500/10 hover:text-red-400 dark:hover:bg-red-500/5 dark:text-slate-500 transition-all group"
+        >
           <LogOut className="w-5 h-5 text-slate-400 dark:text-slate-600 group-hover:text-red-400 transition-colors" />
           <span className="font-medium text-sm">Log out</span>
         </button>
